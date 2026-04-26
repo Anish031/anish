@@ -250,6 +250,34 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 
 
 
+
+.service-grid-detailed {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+.service-detail-card {
+  background: #fff;
+  border: 1px solid #e3e9f2;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 24px #041f4f0f;
+}
+.service-detail-card .s-icon { font-size: 32px; margin-bottom: 10px; }
+.service-detail-card h3 { margin: 0 0 8px; font-size: 21px; color: #1a2a42; }
+.service-detail-card p { margin: 0; color: #5f738d; line-height: 1.6; }
+.services-cta {
+  margin-top: 30px;
+  background: #1a3a6b;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  padding: 36px 20px;
+}
+.services-cta h3 { margin: 0 0 8px; font-size: 30px; }
+.services-cta p { margin: 0 0 18px; color: #c9ddff; }
+
 .principal-block { margin-top: 26px; }
 .authorized-grid {
   display: grid;
@@ -360,7 +388,7 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
   .menu { display: none; }
   .logo img { height: 50px; max-width: 100%; }
   .copyright-inner { flex-direction: column; align-items: flex-start; }
-  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid, .subcat-grid.three-col, .subcat-grid.two-col {
+  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid, .subcat-grid.three-col, .subcat-grid.two-col, .service-grid-detailed {
     grid-template-columns: 1fr;
   }
   h2 { font-size: 33px; }

@@ -137,6 +137,57 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 .vision-card { background: #1a3a6b; color: #f0f6ff; }
 .mission-card { background: #f2c529; color: #0d2557; }
 .about-content p { color: #5f738d; line-height: 1.7; }
+
+.product-category {
+  margin-top: 26px;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 24px;
+}
+.product-category h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 28px;
+  color: #1a2a42;
+}
+.product-category h3 span { font-size: 32px; }
+.cat-blue { background: #edf4ff; border-color: #cfe1ff; }
+.cat-teal { background: #eaf9f8; border-color: #c8ece8; }
+.cat-indigo { background: #eef0ff; border-color: #d7dbff; }
+.subcat-grid {
+  display: grid;
+  gap: 14px;
+}
+.subcat-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+.subcat-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+.subcat-grid article {
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 12px;
+  padding: 18px;
+}
+.subcat-grid h4 { margin: 0 0 8px; color: #1a3a6b; }
+.subcat-grid ul { margin: 0; padding: 0; list-style: none; }
+.subcat-grid li {
+  position: relative;
+  padding-left: 14px;
+  margin: 6px 0;
+  color: #526a86;
+  font-size: 14px;
+}
+.subcat-grid li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #1a3a6b;
+  position: absolute;
+  left: 0;
+  top: .6em;
+}
+
 .stats {
   background: var(--primary);
   color: #fff;
@@ -144,7 +195,7 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   text-align: center;
 }
 .stats strong { display: block; color: var(--accent); font-size: 38px; }
@@ -309,7 +360,7 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
   .menu { display: none; }
   .logo img { height: 50px; max-width: 100%; }
   .copyright-inner { flex-direction: column; align-items: flex-start; }
-  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid {
+  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid, .subcat-grid.three-col, .subcat-grid.two-col {
     grid-template-columns: 1fr;
   }
   h2 { font-size: 33px; }

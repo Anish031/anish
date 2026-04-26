@@ -1,0 +1,20 @@
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Eminot Lifesciences logo</title>
+  <desc id="desc">Blue circular EG mark with Eminot Lifesciences wordmark</desc>
+
+  <g transform="translate(12 12)">
+    <circle cx="118" cy="118" r="116" fill="#0a63ad"/>
+    <circle cx="118" cy="118" r="96" fill="none" stroke="#ffffff" stroke-width="14"/>
+    <circle cx="118" cy="118" r="84" fill="#0a63ad"/>
+
+    <text x="118" y="145" text-anchor="middle" font-size="106" font-family="Brush Script MT, Lucida Handwriting, cursive" fill="#ffffff" letter-spacing="2">EG</text>
+  </g>
+
+  <g transform="translate(300 38)" fill="#1f4f8f">
+    <text x="0" y="76" font-size="132" font-family="Times New Roman, Georgia, serif" font-weight="700" letter-spacing="2">EMINOT</text>
+    <text x="130" y="212" font-size="132" font-family="Times New Roman, Georgia, serif" font-weight="700" letter-spacing="2">LIFESCIENCES</text>
+
+    <text x="0" y="76" font-size="132" font-family="Times New Roman, Georgia, serif" fill="none" stroke="#19406f" stroke-width="2" letter-spacing="2">EMINOT</text>
+    <text x="130" y="212" font-size="132" font-family="Times New Roman, Georgia, serif" fill="none" stroke="#19406f" stroke-width="2" letter-spacing="2">LIFESCIENCES</text>
+  </g>
+</svg>

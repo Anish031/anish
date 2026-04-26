@@ -199,17 +199,60 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 
 
 
-.principal-grid { margin-top: 24px; }
-.principal-card {
-  border: 1px solid #dce5f0;
-  border-radius: 12px;
-  padding: 20px;
-  background: linear-gradient(180deg, #ffffff, #f4f8fd);
-  text-align: center;
-  box-shadow: 0 8px 24px #041f4f0f;
+.principal-block { margin-top: 26px; }
+.authorized-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 18px;
 }
-.principal-card h4 { margin: 0 0 8px; color: #133761; }
-.principal-card p { margin: 0; color: #5f738d; font-size: 14px; }
+.authorized-card {
+  border: 2px solid #1a3a6b;
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #1a2a42;
+  background: #fff;
+}
+.authorized-card .badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #1a3a6b;
+  color: #fff;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 10px;
+}
+.authorized-card h4 { margin: 0 0 6px; font-size: 15px; }
+.authorized-card p { margin: 0; font-size: 12px; color: #5f738d; line-height: 1.45; }
+.authorized-card span {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  background: #edf4ff;
+  color: #1a3a6b;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.subdealer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+.subdealer-card {
+  background: #f6f8fc;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  padding: 16px;
+}
+.subdealer-card h4 { margin: 0 0 4px; }
+.subdealer-card .parent { margin: 0 0 8px; color: #1a3a6b; font-size: 12px; font-weight: 700; }
+.subdealer-card p { margin: 0; color: #5f738d; }
 
 .contact-section { background: #fff; }
 .contact-hero {
@@ -266,7 +309,7 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
   .menu { display: none; }
   .logo img { height: 50px; max-width: 100%; }
   .copyright-inner { flex-direction: column; align-items: flex-start; }
-  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid {
+  .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid {
     grid-template-columns: 1fr;
   }
   h2 { font-size: 33px; }

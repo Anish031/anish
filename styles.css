@@ -167,15 +167,21 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 .footer ul { list-style: none; padding: 0; margin: 0; line-height: 1.9; }
 .copyright {
   border-top: 1px solid #28568d;
-  text-align: center;
-  padding: 12px;
-  font-size: 14px;
+  padding: 10px 0;
+  font-size: 12px;
+}
+.copyright-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
 }
 
 @media (max-width: 960px) {
   .topbar-wrap { flex-direction: column; gap: 6px; }
   .menu { display: none; }
   .logo img { height: 50px; max-width: 100%; }
+  .copyright-inner { flex-direction: column; align-items: flex-start; }
   .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid {
     grid-template-columns: 1fr;
   }

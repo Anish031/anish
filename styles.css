@@ -89,6 +89,23 @@ body {
   background: #ffffff1a;
   border-radius: 12px;
   backdrop-filter: blur(2px);
+  transition: background .2s ease;
+}
+.hero-cards article:hover { background: #ffffff2b; }
+.hero-icon {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.hero-cards h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.hero-cards p {
+  margin: 0;
+  color: #d9e7ff;
+  font-size: 12px;
+  line-height: 1.45;
 }
 .section-gap { padding: 72px 0; }
 .about {

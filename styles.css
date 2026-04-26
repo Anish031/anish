@@ -100,7 +100,7 @@ body {
 .about-image {
   min-height: 370px;
   border-radius: 14px;
-  background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80') center/cover;
+  background: url('assets/about-us-image.svg') center/cover;
   position: relative;
 }
 .badge {

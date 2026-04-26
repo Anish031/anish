@@ -133,7 +133,10 @@ body {
 .subhead { color: #6a7f99; font-weight: 700; letter-spacing: 2px; font-size: 12px; }
 h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
-.vision-grid article { background: var(--bg); padding: 16px; border-radius: 10px; }
+.vision-grid article { padding: 20px; border-radius: 12px; }
+.vision-card { background: #1a3a6b; color: #f0f6ff; }
+.mission-card { background: #f2c529; color: #0d2557; }
+.about-content p { color: #5f738d; line-height: 1.7; }
 .stats {
   background: var(--primary);
   color: #fff;

@@ -100,7 +100,7 @@ body {
 .about-image {
   min-height: 370px;
   border-radius: 14px;
-  background: url('lab.png') center/cover;
+  background: url('assets/lab.png') center/cover;
   position: relative;
 }
 .badge {

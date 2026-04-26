@@ -153,6 +153,12 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
   grid-template-columns: 2fr 1fr 1fr 1fr;
   padding: 36px 0;
 }
+.footer-logo {
+  height: 54px;
+  width: auto;
+  display: block;
+  margin-bottom: 10px;
+}
 .footer ul { list-style: none; padding: 0; margin: 0; line-height: 1.9; }
 .copyright {
   border-top: 1px solid #28568d;

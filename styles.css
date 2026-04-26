@@ -198,6 +198,19 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 }
 
 
+
+.principal-grid { margin-top: 24px; }
+.principal-card {
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(180deg, #ffffff, #f4f8fd);
+  text-align: center;
+  box-shadow: 0 8px 24px #041f4f0f;
+}
+.principal-card h4 { margin: 0 0 8px; color: #133761; }
+.principal-card p { margin: 0; color: #5f738d; font-size: 14px; }
+
 .contact-section { background: #fff; }
 .contact-hero {
   background: #1a3a6b;

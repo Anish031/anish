@@ -381,6 +381,21 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 .founder-box { margin-top: 24px; background: #f0f6ff; border: 1px solid #dce9ff; border-radius: 12px; padding: 18px; }
 .founder-box h4 { margin: 0 0 8px; color: #1a3a6b; }
 .founder-box p { margin: 0; color: #4e6481; }
+
+.alert {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+.alert-default { background: #f1f7ff; border-color: #cfe0f5; color: #173459; }
+.alert-destructive { background: #fff1f1; border-color: #f2caca; color: #9f1f1f; }
+.alert-title { margin: 0 0 4px; font-weight: 700; }
+.alert-description p { margin: 0; line-height: 1.5; }
+.is-hidden { display: none; }
+
 .contact-form {
   border: 1px solid #dce5f0;
   border-radius: 14px;

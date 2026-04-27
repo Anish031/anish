@@ -243,6 +243,10 @@
       <div>
         <form class="contact-form" id="contactForm">
           <h3>Send Us a Message</h3>
+          <div id="formAlert" class="alert alert-default is-hidden" role="alert" aria-live="polite">
+            <h5 class="alert-title">Message Sent!</h5>
+            <div class="alert-description"><p>Thank you for reaching out. Our team will get back to you within 24 hours.</p></div>
+          </div>
           <label>Full Name<input type="text" placeholder="Your Name" required /></label>
           <label>Email Address<input type="email" placeholder="your@email.com" required /></label>
           <label>Phone Number<input type="tel" placeholder="+91 XXXXX XXXXX" required /></label>
@@ -300,6 +304,8 @@
         event.preventDefault();
         submitDialog.showModal();
         contactForm.reset();
+        const formAlert = document.getElementById('formAlert');
+        if (formAlert) formAlert.classList.remove('is-hidden');
       });
     }
 

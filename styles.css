@@ -449,8 +449,12 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 
 body.dark-mode {
   background: #0f1d33;
-  color: #d8e6ff;
+  color: #eaf2ff;
 }
+body.dark-mode .topbar,
+body.dark-mode .footer,
+body.dark-mode .contact-hero,
+body.dark-mode .stats { background: #0c1830; }
 body.dark-mode .navbar,
 body.dark-mode .about,
 body.dark-mode .products,
@@ -464,22 +468,51 @@ body.dark-mode .service-detail-card,
 body.dark-mode .subdealer-card,
 body.dark-mode .authorized-card,
 body.dark-mode .contact-form,
-body.dark-mode .founder-box {
+body.dark-mode .founder-box,
+body.dark-mode .subcat-grid article,
+body.dark-mode .vision-card,
+body.dark-mode .mission-card {
   background: #142743;
-  color: #d8e6ff;
+  color: #eaf2ff;
   border-color: #2e4568;
 }
 body.dark-mode .theme-toggle { background: #1a2f4f; border-color: #3a567d; color: #fff; }
 body.dark-mode .menu a,
+body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
 body.dark-mode h4,
-body.dark-mode .subcat-grid h4 { color: #e6f0ff; }
+body.dark-mode h5,
+body.dark-mode .subcat-grid h4,
+body.dark-mode .alert-title,
+body.dark-mode .copyright,
+body.dark-mode .footer h4,
+body.dark-mode .footer p,
+body.dark-mode .footer li,
+body.dark-mode .topbar { color: #eef4ff; }
 body.dark-mode .muted,
 body.dark-mode p,
 body.dark-mode li,
 body.dark-mode .contact-list p,
-body.dark-mode .contact-list a { color: #b8c9e4; }
+body.dark-mode .contact-list a,
+body.dark-mode .subcat-grid li,
+body.dark-mode .authorized-card p,
+body.dark-mode .subdealer-card p,
+body.dark-mode .founder-box p,
+body.dark-mode .alert-description p { color: #c8d8f0; }
+body.dark-mode .contact-form label,
+body.dark-mode .label,
+body.dark-mode .subhead { color: #d5e3f8; }
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form textarea {
+  background: #0f213c;
+  color: #edf3ff;
+  border-color: #3a567d;
+}
+body.dark-mode .contact-form input::placeholder,
+body.dark-mode .contact-form textarea::placeholder { color: #9fb3d4; }
+body.dark-mode .btn-primary { background: #2f5b98; }
+body.dark-mode .btn-yellow { background: #f3cb4d; color: #132b52; }
 
 @media (max-width: 960px) {
   .topbar-wrap { flex-direction: column; gap: 6px; }

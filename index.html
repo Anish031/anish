@@ -29,7 +29,10 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#principals">Principals</a></li>
       </ul>
-      <a class="btn btn-primary" href="#contact">Contact Us</a>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle website theme">🌙</button>
+        <a class="btn btn-primary" href="#contact">Contact Us</a>
+      </div>
     </nav>
   </header>
 
@@ -298,6 +301,7 @@
     const contactForm = document.getElementById('contactForm');
     const submitDialog = document.getElementById('submitDialog');
     const dialogClose = document.getElementById('dialogClose');
+    const themeToggle = document.getElementById('themeToggle');
 
     if (contactForm && submitDialog) {
       contactForm.addEventListener('submit', function (event) {
@@ -312,6 +316,13 @@
     if (dialogClose && submitDialog) {
       dialogClose.addEventListener('click', function () {
         submitDialog.close();
+      });
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
       });
     }
   </script>

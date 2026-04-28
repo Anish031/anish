@@ -50,6 +50,22 @@ body {
   margin: 0;
 }
 .menu a { text-decoration: none; color: #173459; font-weight: 600; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #c7d8eb;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
 .btn {
   text-decoration: none;
   padding: 10px 20px;
@@ -430,9 +446,45 @@ h2 { font-size: 42px; margin: 6px 0 14px; color: #0d2d56; }
 .alert-cancel { background: #eef4ff; color: #173459; border: 1px solid #c7d9f2; }
 
 
+
+body.dark-mode {
+  background: #0f1d33;
+  color: #d8e6ff;
+}
+body.dark-mode .navbar,
+body.dark-mode .about,
+body.dark-mode .products,
+body.dark-mode .services,
+body.dark-mode .principals,
+body.dark-mode .contact-section {
+  background: transparent;
+}
+body.dark-mode .product-category,
+body.dark-mode .service-detail-card,
+body.dark-mode .subdealer-card,
+body.dark-mode .authorized-card,
+body.dark-mode .contact-form,
+body.dark-mode .founder-box {
+  background: #142743;
+  color: #d8e6ff;
+  border-color: #2e4568;
+}
+body.dark-mode .theme-toggle { background: #1a2f4f; border-color: #3a567d; color: #fff; }
+body.dark-mode .menu a,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode .subcat-grid h4 { color: #e6f0ff; }
+body.dark-mode .muted,
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode .contact-list p,
+body.dark-mode .contact-list a { color: #b8c9e4; }
+
 @media (max-width: 960px) {
   .topbar-wrap { flex-direction: column; gap: 6px; }
   .menu { display: none; }
+  .nav-actions { margin-left: auto; }
   .logo img { height: 50px; max-width: 100%; }
   .copyright-inner { flex-direction: column; align-items: flex-start; }
   .hero-content, .about, .card-grid.three, .card-grid.four, .footer-grid, .stats-grid, .vision-grid, .contact-grid, .authorized-grid, .subdealer-grid, .subcat-grid.three-col, .subcat-grid.two-col, .service-grid-detailed {

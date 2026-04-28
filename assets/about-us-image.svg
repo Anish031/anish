@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Laboratory research scene illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d6eefc"/>
+      <stop offset="1" stop-color="#f3fbff"/>
+    </linearGradient>
+    <linearGradient id="glove" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#45c1ff"/>
+      <stop offset="1" stop-color="#0a84d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="0" y="520" width="1200" height="280" fill="#d5eaf6"/>
+  <rect x="70" y="70" width="420" height="260" rx="18" fill="#e8f4fb"/>
+  <rect x="170" y="140" width="210" height="130" rx="12" fill="#a9c3d8"/>
+  <circle cx="290" cy="150" r="28" fill="#6f8faa"/>
+  <path d="M420 540c80-90 210-120 340-40 30 20 60 52 58 90H320c12-16 44-34 100-50z" fill="url(#glove)" opacity="0.95"/>
+  <path d="M575 400l95 135-72 40-84-126z" fill="#ecf7ff"/>
+  <path d="M585 410l78 111-57 30-71-103z" fill="#2ca7e6" opacity="0.75"/>
+  <rect x="730" y="490" width="120" height="170" rx="16" fill="#74d087"/>
+  <rect x="885" y="450" width="140" height="210" rx="16" fill="#9cd9ff"/>
+  <rect x="540" y="640" width="420" height="80" rx="14" fill="#b9dff3"/>
+</svg>

@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Console — Eminot Lifesciences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:       #1a3a6b;
+      --brand-mid:   #245aa8;
+      --brand-light: #d6e4f7;
+      --accent:      #0e7d6e;
+      --accent-lt:   #d4f0eb;
+      --danger:      #c0392b;
+      --danger-lt:   #fde8e8;
+      --warn:        #b45309;
+      --warn-lt:     #fef3c7;
+      --bg:          #f0f4fb;
+      --surface:     #ffffff;
+      --border:      #dce4ef;
+      --text:        #1a2540;
+      --muted:       #6b7a99;
+      --sidebar-w:   240px;
+      --radius:      10px;
+      --shadow:      0 2px 12px rgba(26,58,107,.10);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      font-size: 15px;
+    }
+
+    /* ── LOGIN SCREEN ── */
+    #loginScreen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, var(--brand) 0%, #0d2248 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-box {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 48px 44px;
+      width: 380px;
+      max-width: 95vw;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+      text-align: center;
+    }
+    .login-logo { font-size: 42px; margin-bottom: 8px; }
+    .login-brand { font-size: 20px; font-weight: 700; color: var(--brand); margin-bottom: 4px; }
+    .login-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .login-box label { display: block; text-align: left; font-size: 12px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+    .login-box input {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: inherit; font-size: 14px; margin-bottom: 18px;
+      outline: none; transition: border .2s;
+    }
+    .login-box input:focus { border-color: var(--brand-mid); }
+    .login-btn {
+      width: 100%; padding: 13px; background: var(--brand);
+      color: #fff; border: none; border-radius: 8px; font-size: 15px;
+      font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .login-btn:hover { background: var(--brand-mid); }
+    .login-err { color: var(--danger); font-size: 13px; margin-top: 12px; display: none; }
+
+    /* ── LAYOUT ── */
+    #appShell { display: none; width: 100%; }
+    #appShell.visible { display: flex; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w); min-height: 100vh;
+      background: var(--brand);
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      padding: 22px 20px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-logo-icon { font-size: 28px; }
+    .sidebar-logo-text { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .sidebar-logo-text span { font-weight: 300; opacity: .7; font-size: 11px; display: block; }
+
+    .sidebar-nav { flex: 1; padding: 12px 10px; overflow-y: auto; }
+    .nav-group-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: rgba(255,255,255,.4);
+      padding: 14px 10px 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px;
+      color: rgba(255,255,255,.75); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all .15s; margin-bottom: 2px;
+      text-decoration: none;
+    }
+    .nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .nav-item.active { background: rgba(255,255,255,.18); color: #fff; }
+    .nav-item .nav-icon { font-size: 17px; width: 22px; text-align: center; }
+
+    .sidebar-footer {
+      padding: 14px 10px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .logout-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px;
+      color: rgba(255,255,255,.6); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all .15s; background: none; border: none; width: 100%;
+    }
+    .logout-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    /* ── MAIN ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1; display: flex; flex-direction: column; min-height: 100vh;
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 28px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+    .topbar-title { font-size: 17px; font-weight: 700; color: var(--brand); }
+    .topbar-right { display: flex; align-items: center; gap: 14px; }
+    .admin-badge {
+      background: var(--brand-light); color: var(--brand);
+      font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+    }
+
+    /* ── CONTENT ── */
+    .page-content { padding: 28px; flex: 1; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── DASHBOARD CARDS ── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px; margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 22px 20px; box-shadow: var(--shadow);
+      border-left: 4px solid var(--brand);
+    }
+    .stat-card.green { border-left-color: var(--accent); }
+    .stat-card.orange { border-left-color: #d97706; }
+    .stat-card.purple { border-left-color: #7c3aed; }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 600;
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .stat-value { font-size: 32px; font-weight: 700; color: var(--brand); }
+    .stat-card.green .stat-value { color: var(--accent); }
+    .stat-card.orange .stat-value { color: #d97706; }
+    .stat-card.purple .stat-value { color: #7c3aed; }
+
+    /* ── PANEL ── */
+    .panel {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden; margin-bottom: 24px;
+    }
+    .panel-header {
+      padding: 16px 22px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title { font-size: 15px; font-weight: 700; color: var(--brand); }
+    .panel-body { padding: 22px; }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; transition: all .15s; }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-mid); }
+    .btn-success { background: var(--accent); color: #fff; }
+    .btn-success:hover { background: #0c6b5e; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-danger:hover { background: #a93226; }
+    .btn-ghost { background: transparent; border: 1.5px solid var(--border);
+      color: var(--text); }
+    .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    /* ── TABLE ── */
+    .tbl { width: 100%; border-collapse: collapse; }
+    .tbl th { text-align: left; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+      padding: 10px 14px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .tbl td { padding: 12px 14px; border-bottom: 1px solid var(--border);
+      font-size: 14px; vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: #f7f9fc; }
+
+    /* ── BADGE ── */
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 11px; font-weight: 600; }
+    .badge-blue { background: var(--brand-light); color: var(--brand); }
+    .badge-green { background: var(--accent-lt); color: var(--accent); }
+    .badge-warn { background: var(--warn-lt); color: var(--warn); }
+    .badge-red { background: var(--danger-lt); color: var(--danger); }
+
+    /* ── FORM ── */
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: inherit; font-size: 14px; outline: none;
+      transition: border .2s; background: var(--surface); color: var(--text); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--brand-mid); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(10,20,50,.45);
+      z-index: 200; display: none; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 14px;
+      width: 560px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+    .modal-header {
+      padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; }
+    .modal-header h3 { font-size: 16px; font-weight: 700; color: var(--brand); }
+    .modal-close { background: none; border: none; font-size: 20px;
+      cursor: pointer; color: var(--muted); padding: 0 4px; }
+    .modal-body { padding: 24px; }
+
+    /* ── TOAST ── */
+    #toastArea { position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      display: flex; flex-direction: column; gap: 10px; }
+    .toast {
+      background: var(--text); color: #fff; padding: 12px 18px;
+      border-radius: 10px; font-size: 13px; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25); display: flex; align-items: center; gap: 8px;
+      animation: slideIn .25s ease; min-width: 240px; }
+    .toast.success { background: var(--accent); }
+    .toast.error { background: var(--danger); }
+    @keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── SECTION HERO ── */
+    .page-hero {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 22px; gap: 12px;
+    }
+    .page-hero h2 { font-size: 22px; font-weight: 700; color: var(--brand); }
+    .page-hero p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── INQUIRY STATUS ── */
+    .inq-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .inq-field label { font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em; }
+    .inq-field p { font-size: 14px; margin-top: 2px; }
+
+    /* ── SITE SETTINGS ── */
+    .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
+    .empty-state .es-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform .25s; }
+      .sidebar.open { transform: none; }
+      .main { margin-left: 0; }
+      .form-row, .settings-grid, .inq-detail { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ LOGIN ══════════════════ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">🔬</div>
+    <div class="login-brand">Eminot Lifesciences</div>
+    <div class="login-sub">Admin Console — Secure Sign In</div>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="admin" autocomplete="username" />
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" />
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div class="login-err" id="loginErr">⚠ Incorrect credentials. Try again.</div>
+  </div>
+</div>
+
+<!-- ══════════════════ APP ══════════════════ -->
+<div id="appShell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🔬</div>
+      <div class="sidebar-logo-text">Eminot Admin<span>Lifesciences Console</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Overview</div>
+      <a class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <div class="nav-group-label">Content</div>
+      <a class="nav-item" onclick="showPage('products')">
+        <span class="nav-icon">🧫</span> Products
+      </a>
+      <a class="nav-item" onclick="showPage('services')">
+        <span class="nav-icon">⚙️</span> Services
+      </a>
+      <a class="nav-item" onclick="showPage('principals')">
+        <span class="nav-icon">🏢</span> Principals
+      </a>
+      <div class="nav-group-label">Enquiries</div>
+      <a class="nav-item" onclick="showPage('inquiries')">
+        <span class="nav-icon">✉️</span> Inquiries <span id="inqBadge" style="margin-left:auto;background:var(--danger);color:#fff;border-radius:20px;font-size:11px;padding:1px 8px;font-weight:700;">3</span>
+      </a>
+      <div class="nav-group-label">Settings</div>
+      <a class="nav-item" onclick="showPage('settings')">
+        <span class="nav-icon">⚙️</span> Site Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">🚪 Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <span class="admin-badge">👤 Admin</span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-hero">
+          <div>
+            <h2>Good day, Admin 👋</h2>
+            <p>Here's a snapshot of your Eminot Lifesciences website.</p>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-label">Products</div><div class="stat-value" id="stat-products">6</div></div>
+          <div class="stat-card green"><div class="stat-label">Services</div><div class="stat-value" id="stat-services">6</div></div>
+          <div class="stat-card orange"><div class="stat-label">Principals</div><div class="stat-value" id="stat-principals">4</div></div>
+          <div class="stat-card purple"><div class="stat-label">Pending Inquiries</div><div class="stat-value">3</div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">Recent Inquiries</span><button class="btn btn-ghost btn-sm" onclick="showPage('inquiries')">View All</button></div>
+          <div class="panel-body" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Status</th></tr></thead>
+              <tbody id="recentInqTbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">Quick Actions</span></div>
+          <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="showPage('products');openModal('productModal','Add Product')">➕ Add Product</button>
+            <button class="btn btn-success" onclick="showPage('services');openModal('serviceModal','Add Service')">➕ Add Service</button>
+            <button class="btn btn-ghost" onclick="showPage('principals');openModal('principalModal','Add Principal')">➕ Add Principal</button>
+            <button class="btn btn-ghost" onclick="showPage('settings')">⚙️ Edit Site Info</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PRODUCTS ── -->
+      <div class="page" id="page-products">
+        <div class="page-hero">
+          <div><h2>Products</h2><p>Manage product categories displayed on the website.</p></div>
+          <button class="btn btn-primary" onclick="openModal('productModal','Add Product',null)">➕ Add Product</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Name</th><th>Category Tag</th><th>Items Listed</th><th>Actions</th></tr></thead>
+              <tbody id="productsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SERVICES ── -->
+      <div class="page" id="page-services">
+        <div class="page-hero">
+          <div><h2>Services</h2><p>Manage services listed under the Services section.</p></div>
+          <button class="btn btn-primary" onclick="openModal('serviceModal','Add Service',null)">➕ Add Service</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Service Name</th><th>Description</th><th>Actions</th></tr></thead>
+              <tbody id="servicesTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PRINCIPALS ── -->
+      <div class="page" id="page-principals">
+        <div class="page-hero">
+          <div><h2>Principals</h2><p>Manage brand partners & principals displayed on the website.</p></div>
+          <button class="btn btn-primary" onclick="openModal('principalModal','Add Principal',null)">➕ Add Principal</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Brand Name</th><th>Country</th><th>Specialty</th><th>Actions</th></tr></thead>
+              <tbody id="principalsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INQUIRIES ── -->
+      <div class="page" id="page-inquiries">
+        <div class="page-hero">
+          <div><h2>Inquiries</h2><p>Contact form submissions from your website visitors.</p></div>
+          <button class="btn btn-ghost btn-sm" onclick="markAllRead()">✔ Mark All Read</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Status</th><th></th></tr></thead>
+              <tbody id="inquiriesTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="page" id="page-settings">
+        <div class="page-hero">
+          <div><h2>Site Settings</h2><p>Update contact info, taglines, and EmailJS credentials.</p></div>
+        </div>
+        <div class="settings-grid">
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">Contact Information</span></div>
+            <div class="panel-body">
+              <div class="form-group"><label>Phone Number</label><input type="text" id="s-phone" value="+91 96205 59413" /></div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="s-email" value="sales@eminotlifesciences.com" /></div>
+              <div class="form-group"><label>Address</label><textarea id="s-address">Shop No:1, #150, Ground Floor, 3rd Cross, Shanthi Nivas Layout, Valagerahalli, Bengaluru – 560060.</textarea></div>
+              <button class="btn btn-primary" onclick="saveSettings('contact')">Save Contact Info</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">EmailJS Configuration</span></div>
+            <div class="panel-body">
+              <div class="form-group"><label>Public Key</label><input type="text" id="s-ejs-pk" placeholder="YOUR_PUBLIC_KEY" /></div>
+              <div class="form-group"><label>Service ID</label><input type="text" id="s-ejs-sid" placeholder="YOUR_SERVICE_ID" /></div>
+              <div class="form-group"><label>Template ID</label><input type="text" id="s-ejs-tid" placeholder="YOUR_TEMPLATE_ID" /></div>
+              <div class="form-group"><label>To Email</label><input type="email" id="s-ejs-to" value="anishabraham031@gmail.com" /></div>
+              <button class="btn btn-primary" onclick="saveSettings('emailjs')">Save EmailJS Config</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">Hero Section</span></div>
+            <div class="panel-body">
+              <div class="form-group"><label>Hero Tagline</label><input type="text" id="s-tagline" value="World-Class Laboratory Products & Solutions" /></div>
+              <div class="form-group"><label>Hero Sub-text</label><textarea id="s-herosub">Eminot Lifesciences is a trusted supplier of premium scientific laboratory products and instruments, serving research institutions, biotech companies, and industries across Karnataka.</textarea></div>
+              <button class="btn btn-primary" onclick="saveSettings('hero')">Save Hero Text</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">Admin Credentials</span></div>
+            <div class="panel-body">
+              <div class="form-group"><label>Current Password</label><input type="password" id="s-cur-pass" placeholder="Enter current password" /></div>
+              <div class="form-group"><label>New Password</label><input type="password" id="s-new-pass" placeholder="New password" /></div>
+              <div class="form-group"><label>Confirm New Password</label><input type="password" id="s-con-pass" placeholder="Confirm new password" /></div>
+              <button class="btn btn-primary" onclick="changePassword()">Change Password</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+</div><!-- /appShell -->
+
+<!-- ══════════════════ MODALS ══════════════════ -->
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="productModalTitle">Add Product</h3>
+      <button class="modal-close" onclick="closeModal('productModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pm-idx" value="" />
+      <div class="form-group"><label>Product Name</label><input type="text" id="pm-name" placeholder="e.g. Antibodies" /></div>
+      <div class="form-group"><label>Icon (emoji)</label><input type="text" id="pm-icon" placeholder="🧫" maxlength="4" /></div>
+      <div class="form-group"><label>Description</label><textarea id="pm-desc" placeholder="Short product description…"></textarea></div>
+      <div class="form-group"><label>Sub-items (one per line)</label><textarea id="pm-items" placeholder="Primary & Secondary Antibodies&#10;Flow Cytometry Antibody&#10;…"></textarea></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+        <button class="btn btn-ghost" onclick="closeModal('productModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service Modal -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="serviceModalTitle">Add Service</h3>
+      <button class="modal-close" onclick="closeModal('serviceModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="sm-idx" value="" />
+      <div class="form-group"><label>Service Name</label><input type="text" id="sm-name" placeholder="e.g. Gene Synthesis" /></div>
+      <div class="form-group"><label>Icon (emoji)</label><input type="text" id="sm-icon" placeholder="🧬" maxlength="4" /></div>
+      <div class="form-group"><label>Description</label><textarea id="sm-desc" placeholder="Short service description…"></textarea></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="saveService()">Save Service</button>
+        <button class="btn btn-ghost" onclick="closeModal('serviceModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Principal Modal -->
+<div class="modal-overlay" id="principalModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="principalModalTitle">Add Principal</h3>
+      <button class="modal-close" onclick="closeModal('principalModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="prm-idx" value="" />
+      <div class="form-row">
+        <div class="form-group"><label>Brand Name</label><input type="text" id="prm-name" placeholder="e.g. Thermo Fisher" /></div>
+        <div class="form-group"><label>Country</label><input type="text" id="prm-country" placeholder="e.g. USA" /></div>
+      </div>
+      <div class="form-group"><label>Specialty</label><input type="text" id="prm-spec" placeholder="e.g. Molecular Biology" /></div>
+      <div class="form-group"><label>Description</label><textarea id="prm-desc" placeholder="Brief description of the brand…"></textarea></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="savePrincipal()">Save Principal</button>
+        <button class="btn btn-ghost" onclick="closeModal('principalModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Inquiry Detail Modal -->
+<div class="modal-overlay" id="inqModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Inquiry Details</h3>
+      <button class="modal-close" onclick="closeModal('inqModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="inq-detail" id="inqDetail"></div>
+      <div style="margin-top:18px;display:flex;gap:10px;">
+        <button class="btn btn-success btn-sm" onclick="replyInquiry()">✉ Reply via Email</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeModal('inqModal')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Area -->
+<div id="toastArea"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA STORE (localStorage-backed)
+// ══════════════════════════════════════════
+const ADMIN_USER = 'admin';
+let ADMIN_PASS   = localStorage.getItem('eminot_pass') || 'eminot2024';
+
+const defaultProducts = [
+  { name:'Antibodies', icon:'🧫', desc:'Primary, Secondary, Flow Cytometry, IHC Pathology, Small Molecule-specific, In Vivo Grade, and Tag & Loading Control antibodies.',
+    items:'Primary & Secondary Antibodies\nFlow Cytometry Antibody\nIHC Pathology Antibody\nIn Vivo Grade Antibody' },
+  { name:'Molecular Biology Reagents', icon:'🔬', desc:'High-fidelity reagents for amplification, extraction, and electrophoresis.',
+    items:'PCR & qPCR\nReverse Transcription\nNucleic Acid Extraction\nCloning / Site-directed Mutagenesis' },
+  { name:'Kits & Enzymes', icon:'🧪', desc:'Ready-to-use kits and enzyme solutions for diverse laboratory workflows.',
+    items:'ELISA Kits\nProtein Assay Kits\nRestriction Enzymes\nLigases & Polymerases' },
+  { name:'Gel Electrophoresis', icon:'⚡', desc:'Complete range of gel electrophoresis systems and consumables.',
+    items:'Agarose Gels\nPolyacrylamide Gels\nElectrophoresis Systems\nLadders & Stains' },
+  { name:'Instruments', icon:'⚙️', desc:'PCR machines, ELISA readers, spectrophotometers & more.',
+    items:'PCR Machines\nELISA Readers\nSpectrophotometers\nCentrifuges' },
+  { name:'Plasticware & Consumables', icon:'🗂️', desc:'High-quality plasticware and laboratory consumables.',
+    items:'Microtubes & Tips\nPCR Plates\nCryovials\nCell Culture Flasks' }
+];
+
+const defaultServices = [
+  { name:'Assay Development', icon:'🧬', desc:'Custom assay development and validation services.' },
+  { name:'Custom Amplification', icon:'🔁', desc:'Bespoke amplification services for PCR and qPCR.' },
+  { name:'Custom Protein Expression', icon:'🧫', desc:'Recombinant protein expression in various systems.' },
+  { name:'Gene Synthesis', icon:'🔬', desc:'Full-length gene synthesis with sequence verification.' },
+  { name:'Oligonucleotide Synthesis', icon:'🧪', desc:'Custom oligo synthesis for research applications.' },
+  { name:'Sanger Sequencing', icon:'📋', desc:'High-quality Sanger sequencing services.' }
+];
+
+const defaultPrincipals = [
+  { name:'Thermo Fisher Scientific', country:'USA', spec:'Molecular Biology & Instruments', desc:'Global leader in scientific instrumentation and reagents.' },
+  { name:'Bio-Rad Laboratories', country:'USA', spec:'Electrophoresis & PCR', desc:'Innovative products for life science research and diagnostics.' },
+  { name:'Merck Millipore', country:'Germany', spec:'Cell Biology & Filtration', desc:'Provides lab water, filtration, and bioscience products.' },
+  { name:'Abcam', country:'UK', spec:'Antibodies & Assay Kits', desc:'Premium antibody and assay kit supplier for research.' }
+];
+
+const defaultInquiries = [
+  { date:'2026-06-10', name:'Dr. Ramesh Kumar', email:'ramesh@biolab.in', phone:'+91 98765 43210', message:'I need a quote for Thermo Fisher PCR Machines (3 units) for our research lab at NIMHANS.', status:'unread' },
+  { date:'2026-06-12', name:'Priya Sharma', email:'priya.sharma@manipal.edu', phone:'+91 87654 32109', message:'Looking for ELISA kits for cytokine profiling. Please share your catalog and pricing.', status:'unread' },
+  { date:'2026-06-14', name:'Anil Venkatesh', email:'anil.v@genexlabs.com', phone:'+91 76543 21098', message:'We require gene synthesis services for 5 constructs. Can you share your turnaround time and pricing?', status:'unread' },
+  { date:'2026-06-08', name:'Sunitha Reddy', email:'sunitha@pharmaco.in', phone:'+91 65432 10987', message:'Interested in your Cell Culture consumables. Please send us your complete product catalogue.', status:'read' },
+  { date:'2026-06-05', name:'Mohammed Farooq', email:'mfarooq@iiscrsc.edu', phone:'+91 54321 09876', message:'Require primary antibodies for Western Blot. Can you share availability of anti-GAPDH and anti-Beta Actin?', status:'read' }
+];
+
+function load(key, def) {
+  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
+}
+function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+let products   = load('eminot_products',   defaultProducts);
+let services   = load('eminot_services',   defaultServices);
+let principals = load('eminot_principals', defaultPrincipals);
+let inquiries  = load('eminot_inquiries',  defaultInquiries);
+
+let currentInqIdx = null;
+
+// ══════════════════════════════════════════
+//  AUTH
+// ══════════════════════════════════════════
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('appShell').classList.add('visible');
+    renderAll();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('loginUser').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  document.getElementById('appShell').classList.remove('visible');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginErr').style.display = 'none';
+}
+
+// ══════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════
+const pageTitles = { dashboard:'Dashboard', products:'Products', services:'Services',
+  principals:'Principals', inquiries:'Inquiries', settings:'Site Settings' };
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'"))
+      n.classList.add('active');
+  });
+  document.getElementById('topbarTitle').textContent = pageTitles[id] || id;
+  if (id==='dashboard') renderDashboard();
+}
+
+// ══════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════
+function renderAll() { renderDashboard(); renderProducts(); renderServices(); renderPrincipals(); renderInquiries(); updateStats(); }
+
+function updateStats() {
+  document.getElementById('stat-products').textContent   = products.length;
+  document.getElementById('stat-services').textContent   = services.length;
+  document.getElementById('stat-principals').textContent = principals.length;
+  const unread = inquiries.filter(i=>i.status==='unread').length;
+  const badge = document.getElementById('inqBadge');
+  badge.textContent = unread; badge.style.display = unread ? '' : 'none';
+}
+
+function renderDashboard() {
+  const tbody = document.getElementById('recentInqTbody');
+  tbody.innerHTML = inquiries.slice(0,5).map((inq,i) => `
+    <tr>
+      <td>${inq.name}</td>
+      <td><a href="mailto:${inq.email}" style="color:var(--brand-mid)">${inq.email}</a></td>
+      <td style="max-width:220px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${inq.message.slice(0,60)}…</td>
+      <td><span class="badge ${inq.status==='unread'?'badge-red':'badge-green'}">${inq.status}</span></td>
+    </tr>`).join('');
+  updateStats();
+}
+
+function renderProducts() {
+  document.getElementById('productsTbody').innerHTML = products.map((p,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td>${p.icon} <strong>${p.name}</strong></td>
+      <td><span class="badge badge-blue">${p.name.split(' ')[0]}</span></td>
+      <td>${p.items ? p.items.split('\n').filter(Boolean).length : 0} items</td>
+      <td style="display:flex;gap:8px;">
+        <button class="btn btn-ghost btn-sm" onclick="editProduct(${i})">✏ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${i})">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderServices() {
+  document.getElementById('servicesTbody').innerHTML = services.map((s,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td>${s.icon} <strong>${s.name}</strong></td>
+      <td style="max-width:260px;color:var(--muted);font-size:13px">${s.desc}</td>
+      <td style="display:flex;gap:8px;">
+        <button class="btn btn-ghost btn-sm" onclick="editService(${i})">✏ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteService(${i})">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderPrincipals() {
+  document.getElementById('principalsTbody').innerHTML = principals.map((p,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${p.name}</strong></td>
+      <td>${p.country}</td>
+      <td><span class="badge badge-blue">${p.spec}</span></td>
+      <td style="display:flex;gap:8px;">
+        <button class="btn btn-ghost btn-sm" onclick="editPrincipal(${i})">✏ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deletePrincipal(${i})">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderInquiries() {
+  document.getElementById('inquiriesTbody').innerHTML = inquiries.map((inq,i) => `
+    <tr style="${inq.status==='unread'?'font-weight:600':''}">
+      <td style="font-size:12px;color:var(--muted)">${inq.date}</td>
+      <td>${inq.name}</td>
+      <td><a href="mailto:${inq.email}" style="color:var(--brand-mid)">${inq.email}</a></td>
+      <td>${inq.phone}</td>
+      <td style="max-width:200px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:13px">${inq.message}</td>
+      <td><span class="badge ${inq.status==='unread'?'badge-red':'badge-green'}">${inq.status}</span></td>
+      <td><button class="btn btn-ghost btn-sm" onclick="viewInquiry(${i})">View</button></td>
+    </tr>`).join('');
+}
+
+// ══════════════════════════════════════════
+//  PRODUCTS CRUD
+// ══════════════════════════════════════════
+function openModal(id, title, _) {
+  document.getElementById(id).classList.add('open');
+  const t = document.getElementById(id.replace('Modal','')+'ModalTitle') ||
+            document.getElementById(id.replace('Modal','ModalTitle'));
+  if (t) t.textContent = title;
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function editProduct(i) {
+  const p = products[i];
+  document.getElementById('pm-idx').value = i;
+  document.getElementById('pm-name').value = p.name;
+  document.getElementById('pm-icon').value = p.icon;
+  document.getElementById('pm-desc').value = p.desc;
+  document.getElementById('pm-items').value = p.items||'';
+  document.getElementById('productModalTitle').textContent = 'Edit Product';
+  openModal('productModal');
+}
+
+function saveProduct() {
+  const idx  = document.getElementById('pm-idx').value;
+  const data = {
+    name:  document.getElementById('pm-name').value.trim(),
+    icon:  document.getElementById('pm-icon').value.trim() || '🧪',
+    desc:  document.getElementById('pm-desc').value.trim(),
+    items: document.getElementById('pm-items').value.trim()
+  };
+  if (!data.name) return toast('Product name is required.','error');
+  if (idx==='') { products.push(data); } else { products[parseInt(idx)] = data; }
+  save('eminot_products', products);
+  closeModal('productModal');
+  renderProducts(); updateStats();
+  resetForm(['pm-idx','pm-name','pm-icon','pm-desc','pm-items']);
+  toast('Product saved ✓','success');
+}
+
+function deleteProduct(i) {
+  if (!confirm('Delete this product?')) return;
+  products.splice(i,1);
+  save('eminot_products', products);
+  renderProducts(); updateStats(); toast('Product deleted.','error');
+}
+
+// ══════════════════════════════════════════
+//  SERVICES CRUD
+// ══════════════════════════════════════════
+function editService(i) {
+  const s = services[i];
+  document.getElementById('sm-idx').value = i;
+  document.getElementById('sm-name').value = s.name;
+  document.getElementById('sm-icon').value = s.icon;
+  document.getElementById('sm-desc').value = s.desc;
+  document.getElementById('serviceModalTitle').textContent = 'Edit Service';
+  openModal('serviceModal');
+}
+
+function saveService() {
+  const idx  = document.getElementById('sm-idx').value;
+  const data = {
+    name: document.getElementById('sm-name').value.trim(),
+    icon: document.getElementById('sm-icon').value.trim() || '⚙️',
+    desc: document.getElementById('sm-desc').value.trim()
+  };
+  if (!data.name) return toast('Service name is required.','error');
+  if (idx==='') { services.push(data); } else { services[parseInt(idx)] = data; }
+  save('eminot_services', services);
+  closeModal('serviceModal');
+  renderServices(); updateStats();
+  resetForm(['sm-idx','sm-name','sm-icon','sm-desc']);
+  toast('Service saved ✓','success');
+}
+
+function deleteService(i) {
+  if (!confirm('Delete this service?')) return;
+  services.splice(i,1);
+  save('eminot_services', services);
+  renderServices(); updateStats(); toast('Service deleted.','error');
+}
+
+// ══════════════════════════════════════════
+//  PRINCIPALS CRUD
+// ══════════════════════════════════════════
+function editPrincipal(i) {
+  const p = principals[i];
+  document.getElementById('prm-idx').value = i;
+  document.getElementById('prm-name').value = p.name;
+  document.getElementById('prm-country').value = p.country;
+  document.getElementById('prm-spec').value = p.spec;
+  document.getElementById('prm-desc').value = p.desc;
+  document.getElementById('principalModalTitle').textContent = 'Edit Principal';
+  openModal('principalModal');
+}
+
+function savePrincipal() {
+  const idx  = document.getElementById('prm-idx').value;
+  const data = {
+    name:    document.getElementById('prm-name').value.trim(),
+    country: document.getElementById('prm-country').value.trim(),
+    spec:    document.getElementById('prm-spec').value.trim(),
+    desc:    document.getElementById('prm-desc').value.trim()
+  };
+  if (!data.name) return toast('Brand name is required.','error');
+  if (idx==='') { principals.push(data); } else { principals[parseInt(idx)] = data; }
+  save('eminot_principals', principals);
+  closeModal('principalModal');
+  renderPrincipals(); updateStats();
+  resetForm(['prm-idx','prm-name','prm-country','prm-spec','prm-desc']);
+  toast('Principal saved ✓','success');
+}
+
+function deletePrincipal(i) {
+  if (!confirm('Delete this principal?')) return;
+  principals.splice(i,1);
+  save('eminot_principals', principals);
+  renderPrincipals(); updateStats(); toast('Principal deleted.','error');
+}
+
+// ══════════════════════════════════════════
+//  INQUIRIES
+// ══════════════════════════════════════════
+function viewInquiry(i) {
+  currentInqIdx = i;
+  const inq = inquiries[i];
+  inq.status = 'read';
+  save('eminot_inquiries', inquiries);
+  renderInquiries(); renderDashboard();
+  document.getElementById('inqDetail').innerHTML = `
+    <div class="inq-field"><label>Name</label><p>${inq.name}</p></div>
+    <div class="inq-field"><label>Email</label><p><a href="mailto:${inq.email}">${inq.email}</a></p></div>
+    <div class="inq-field"><label>Phone</label><p>${inq.phone}</p></div>
+    <div class="inq-field"><label>Date</label><p>${inq.date}</p></div>
+    <div class="inq-field" style="grid-column:1/-1"><label>Message</label><p style="margin-top:6px;line-height:1.6">${inq.message}</p></div>`;
+  openModal('inqModal');
+}
+
+function replyInquiry() {
+  if (currentInqIdx === null) return;
+  const inq = inquiries[currentInqIdx];
+  window.open(`mailto:${inq.email}?subject=Re: Your Inquiry — Eminot Lifesciences&body=Dear ${inq.name},%0D%0A%0D%0AThank you for reaching out to Eminot Lifesciences.%0D%0A%0D%0A`);
+}
+
+function markAllRead() {
+  inquiries.forEach(i => i.status = 'read');
+  save('eminot_inquiries', inquiries);
+  renderInquiries(); renderDashboard();
+  toast('All inquiries marked as read.','success');
+}
+
+// ══════════════════════════════════════════
+//  SETTINGS
+// ══════════════════════════════════════════
+function saveSettings(section) {
+  toast(`${section.charAt(0).toUpperCase()+section.slice(1)} settings saved ✓`, 'success');
+}
+
+function changePassword() {
+  const cur  = document.getElementById('s-cur-pass').value;
+  const nw   = document.getElementById('s-new-pass').value;
+  const conf = document.getElementById('s-con-pass').value;
+  if (cur !== ADMIN_PASS) return toast('Current password is incorrect.','error');
+  if (!nw)                return toast('New password cannot be empty.','error');
+  if (nw !== conf)        return toast('Passwords do not match.','error');
+  ADMIN_PASS = nw; localStorage.setItem('eminot_pass', nw);
+  document.getElementById('s-cur-pass').value = '';
+  document.getElementById('s-new-pass').value = '';
+  document.getElementById('s-con-pass').value = '';
+  toast('Password updated ✓','success');
+}
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function resetForm(ids) { ids.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; }); }
+
+function toast(msg, type='') {
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.textContent = msg;
+  document.getElementById('toastArea').appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); });
+});
+</script>
+</body>
+</html>

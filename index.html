@@ -47,10 +47,7 @@
       <div class="hero-overlay"></div>
       <div class="hero-particles" id="heroParticles"></div>
     </div>
-
     <div class="container hero-layout">
-
-      <!-- LEFT: Text -->
       <div class="hero-left">
         <div class="hero-tag">✦ Scientific Excellence Since 2023</div>
         <h1 class="hero-title">World-Class <em>Laboratory</em> Products &amp; Solutions</h1>
@@ -59,10 +56,7 @@
           <a href="#products" class="btn btn-accent">Explore Products</a>
           <a href="#contact" class="btn btn-ghost">Contact Us</a>
         </div>
-
       </div>
-
-      <!-- RIGHT: 2x2 Cards -->
       <div class="hero-cards-grid">
         <a class="hero-pcard" href="#products">
           <div class="hpc-icon">🧫</div>
@@ -85,10 +79,7 @@
           <p>Gene synthesis, sequencing &amp; scientific support services.</p>
         </a>
       </div>
-
     </div>
-
-    <!-- SCROLL HINT -->
     <a href="#about" class="hero-scroll">
       <span>Scroll to explore</span>
       <div class="scroll-arrow">↓</div>
@@ -155,7 +146,7 @@
     </div>
   </section>
 
-  <!-- PRODUCTS -->
+  <!-- PRODUCTS — rendered by Firebase -->
   <section class="section products-section" id="products">
     <div class="section-header-band">
       <div class="container">
@@ -164,157 +155,24 @@
         <p class="section-sub light-sub">Comprehensive range of scientific laboratory products from world-class brands.</p>
       </div>
     </div>
-    <div class="container products-grid">
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#0a4fa8">🧫</div>
-        <div class="pc-body">
-          <h3>Antibodies</h3>
-          <p>Primary, Secondary, Flow Cytometry, IHC Pathology, Small Molecule-specific, In Vivo Grade, and Tag &amp; Loading Control antibodies.</p>
-          <ul>
-            <li>Primary &amp; Secondary Antibodies</li>
-            <li>Flow Cytometry Antibody</li>
-            <li>IHC Pathology Antibody</li>
-            <li>In Vivo Grade Antibody</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#0e7d6e">🔬</div>
-        <div class="pc-body">
-          <h3>Molecular Biology Reagents</h3>
-          <p>High-fidelity reagents for amplification, extraction, and electrophoresis supporting cutting-edge molecular research workflows.</p>
-          <ul>
-            <li>PCR &amp; qPCR</li>
-            <li>Reverse Transcription</li>
-            <li>Nucleic Acid Extraction</li>
-            <li>Cloning / Site-directed Mutagenesis</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#5a0ea8">🧪</div>
-        <div class="pc-body">
-          <h3>Molecular Biology Kits &amp; Enzymes</h3>
-          <p>Complete kits and enzymes for detection, quantification and amplification with consistent, reproducible performance.</p>
-          <ul>
-            <li>ELISA Kits</li>
-            <li>Nucleic Acid Purification Kits</li>
-            <li>PCR Enzymes &amp; Kits</li>
-            <li>RT-PCR Enzymes &amp; Kits</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#b05c00">⚗️</div>
-        <div class="pc-body">
-          <h3>Gel Electrophoresis</h3>
-          <p>From gel casting to visualization — reliable solutions for sharp separation and clear resolution.</p>
-          <ul>
-            <li>Gel Media &amp; Casting Reagents</li>
-            <li>Gel Stains &amp; Destainers</li>
-            <li>Protein Molecular Markers</li>
-            <li>DNA Ladders</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#0a3d7a">⚙️</div>
-        <div class="pc-body">
-          <h3>Instruments</h3>
-          <p>Bench-top to high-end analytical instruments for every stage of your research workflow.</p>
-          <ul>
-            <li>PCR Machine &amp; RT-PCR Systems</li>
-            <li>CO₂ Incubator &amp; Water Bath</li>
-            <li>ELISA Plate Reader &amp; Washer</li>
-            <li>Spectrophotometer &amp; Cell Counter</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
-      <a class="product-card" href="#contact">
-        <div class="pc-icon-wrap" style="--c:#0e6b4a">🧬</div>
-        <div class="pc-body">
-          <h3>Plasticware &amp; Cell Culture</h3>
-          <p>Precision lab plastics and cell culture consumables built for safety, sterility, and efficiency.</p>
-          <ul>
-            <li>Cell Culture Flasks &amp; Microplates</li>
-            <li>Centrifuge Tubes &amp; Petri Dishes</li>
-            <li>Pipette Tips &amp; Tubes</li>
-            <li>Cryogenic Storage &amp; Filtration</li>
-          </ul>
-        </div>
-        <span class="pc-link">Know More →</span>
-      </a>
-
+    <div class="container products-grid" id="productsGrid">
+      <!-- skeleton loaders -->
+      <div class="product-card skeleton-card" aria-hidden="true"></div>
+      <div class="product-card skeleton-card" aria-hidden="true"></div>
+      <div class="product-card skeleton-card" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- SERVICES — rendered by Firebase -->
   <section class="section services-section" id="services">
     <div class="container">
       <p class="eyebrow">Our Services</p>
       <h2>Comprehensive Scientific Services</h2>
       <p class="section-sub">End-to-end molecular biology solutions backed by decades of expertise and innovation.</p>
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="svc-num">01</div>
-          <div class="svc-icon">🧫</div>
-          <h3>Assay Development</h3>
-          <p>End-to-end assay development services customized for your research or diagnostic requirements. Our team designs, optimizes, and validates assays for PCR, Real-time PCR, Sanger sequencing, and point-of-care applications.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="svc-num">02</div>
-          <div class="svc-icon">🔁</div>
-          <h3>Custom Amplification</h3>
-          <p>Specialized PCR amplification services with high fidelity and precision. We handle both standard and difficult-to-amplify sequences, including multiplex PCR, gene expression studies, and copy number analysis.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="svc-num">03</div>
-          <div class="svc-icon">🧬</div>
-          <h3>Custom Protein Expression</h3>
-          <p>Recombinant protein expression and purification using bacterial, yeast, insect, and mammalian expression systems tailored to your exact specifications.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="svc-num">04</div>
-          <div class="svc-icon">🔬</div>
-          <h3>Gene Synthesis</h3>
-          <p>High-fidelity gene synthesis for research, therapeutic, and industrial applications. We offer codon optimization and 100% full-sequence verification for every order.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="svc-num">05</div>
-          <div class="svc-icon">🧪</div>
-          <h3>Oligonucleotide Design &amp; Synthesis</h3>
-          <p>Custom oligo design and synthesis for PCR, sequencing, CRISPR, and gene expression applications. Modifications and fluorescent labeling available.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="svc-num">06</div>
-          <div class="svc-icon">📊</div>
-          <h3>Sanger Sequencing</h3>
-          <p>Accurate and rapid Sanger sequencing for DNA sequence confirmation, mutation analysis, and vector verification with fast turnaround times.</p>
-          <a href="#contact" class="svc-link">Enquire →</a>
-        </div>
-
+      <div class="services-grid" id="servicesGrid">
+        <div class="service-card skeleton-card" aria-hidden="true"></div>
+        <div class="service-card skeleton-card" aria-hidden="true"></div>
+        <div class="service-card skeleton-card" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -358,7 +216,7 @@
       </div>
 
       <h3 class="block-label" style="margin-top:52px">Sub-Dealer Brands</h3>
-      <div class="subdealer-grid">
+      <div class="subdealer-grid" id="subdealerGrid">
         <div class="sub-card"><h4>Invitrogen / Gibco / Nunc / Fermentas</h4><p>Thermo Fisher Scientific — World leader in life sciences tools.</p></div>
         <div class="sub-card"><h4>Himedia</h4><p>HiMedia Labs — Microbiology and cell biology research products.</p></div>
         <div class="sub-card"><h4>Tarsons</h4><p>Tarsons Products — High-quality lab plasticware manufacturer.</p></div>
@@ -387,12 +245,10 @@
   <!-- CONTACT -->
   <section class="section contact-section" id="contact">
     <div class="container contact-grid">
-
       <div class="contact-info">
         <p class="eyebrow">Get In Touch</p>
         <h2>Contact Us</h2>
         <p class="section-sub" style="text-align:left;margin-left:0">We'd love to hear from you. Reach out to our team for enquiries, quotes, or support.</p>
-
         <div class="contact-items">
           <div class="ci">
             <div class="ci-icon">📞</div>
@@ -424,7 +280,6 @@
             </div>
           </div>
         </div>
-
         <div class="founder-card">
           <div class="founder-avatar">PS</div>
           <div>
@@ -452,7 +307,6 @@
           <p class="form-privacy">🔒 Your information is kept private and never shared.</p>
         </form>
       </div>
-
     </div>
   </section>
 
@@ -479,24 +333,16 @@
       </div>
       <div>
         <h5>Our Products</h5>
-        <ul>
-          <li>Antibodies</li>
-          <li>Molecular Biology Reagents</li>
-          <li>Kits &amp; Enzymes</li>
-          <li>Gel Electrophoresis</li>
-          <li>Instruments</li>
-          <li>Plasticware &amp; Consumables</li>
+        <ul id="footerProducts">
+          <li>Antibodies</li><li>Molecular Biology Reagents</li><li>Kits &amp; Enzymes</li>
+          <li>Gel Electrophoresis</li><li>Instruments</li><li>Plasticware &amp; Consumables</li>
         </ul>
       </div>
       <div>
         <h5>Our Services</h5>
-        <ul>
-          <li>Assay Development</li>
-          <li>Custom Amplification</li>
-          <li>Custom Protein Expression</li>
-          <li>Gene Synthesis</li>
-          <li>Oligonucleotide Synthesis</li>
-          <li>Sanger Sequencing</li>
+        <ul id="footerServices">
+          <li>Assay Development</li><li>Custom Amplification</li><li>Custom Protein Expression</li>
+          <li>Gene Synthesis</li><li>Oligonucleotide Synthesis</li><li>Sanger Sequencing</li>
         </ul>
       </div>
       <div>
@@ -521,7 +367,188 @@
     </div>
   </footer>
 
-  <script>
+  <!-- ══ FIREBASE SDK ══ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, serverTimestamp, orderBy, query }
+      from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyg8EbrnDNeejCM3A1toYfPXdEAUx7GkQ",
+      authDomain: "eminot-lifesciences.firebaseapp.com",
+      projectId: "eminot-lifesciences",
+      storageBucket: "eminot-lifesciences.firebasestorage.app",
+      messagingSenderId: "153024129165",
+      appId: "1:153024129165:web:55dcc3a547a23b7d21dac4"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // ── Colour palette for product cards (cycles) ──
+    const COLOURS = ['#0a4fa8','#0e7d6e','#5a0ea8','#b05c00','#0a3d7a','#0e6b4a','#7c3aed','#b45309'];
+
+    // ── RENDER PRODUCTS ──
+    async function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      try {
+        const snap = await getDocs(query(collection(db,'products'), orderBy('order')));
+        if (snap.empty) { fallbackProducts(); return; }
+        grid.innerHTML = '';
+        let i = 0;
+        snap.forEach(doc => {
+          const p = doc.data();
+          const colour = COLOURS[i % COLOURS.length];
+          const items  = (p.items || '').split('\n').filter(Boolean)
+            .map(li => `<li>${li}</li>`).join('');
+          grid.innerHTML += `
+            <a class="product-card" href="#contact">
+              <div class="pc-icon-wrap" style="--c:${colour}">${p.icon || '🧪'}</div>
+              <div class="pc-body">
+                <h3>${p.name}</h3>
+                <p>${p.desc}</p>
+                ${items ? `<ul>${items}</ul>` : ''}
+              </div>
+              <span class="pc-link">Know More →</span>
+            </a>`;
+          i++;
+        });
+        reObserve();
+        updateFooter('footerProducts', snap, d => d.data().name);
+      } catch(e) { fallbackProducts(); }
+    }
+
+    // ── RENDER SERVICES ──
+    async function loadServices() {
+      const grid = document.getElementById('servicesGrid');
+      try {
+        const snap = await getDocs(query(collection(db,'services'), orderBy('order')));
+        if (snap.empty) { fallbackServices(); return; }
+        grid.innerHTML = '';
+        let i = 0;
+        snap.forEach(doc => {
+          const s = doc.data();
+          i++;
+          grid.innerHTML += `
+            <div class="service-card">
+              <div class="svc-num">${String(i).padStart(2,'0')}</div>
+              <div class="svc-icon">${s.icon || '🔬'}</div>
+              <h3>${s.name}</h3>
+              <p>${s.desc}</p>
+              <a href="#contact" class="svc-link">Enquire →</a>
+            </div>`;
+        });
+        reObserve();
+        updateFooter('footerServices', snap, d => d.data().name);
+      } catch(e) { fallbackServices(); }
+    }
+
+    // ── FOOTER UPDATER ──
+    function updateFooter(id, snap, fn) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = '';
+      snap.forEach(d => { el.innerHTML += `<li>${fn(d)}</li>`; });
+    }
+
+    // ── RE-OBSERVE newly rendered cards for scroll animation ──
+    function reObserve() {
+      const ro = new IntersectionObserver(entries => {
+        entries.forEach((e, idx) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('revealed'), idx * 60);
+            ro.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.product-card:not(.revealed), .service-card:not(.revealed)').forEach(el => ro.observe(el));
+    }
+
+    // ── FALLBACKS (static HTML shown if Firestore fails) ──
+    function fallbackProducts() {
+      document.getElementById('productsGrid').innerHTML = `
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#0a4fa8">🧫</div><div class="pc-body"><h3>Antibodies</h3><p>Primary, Secondary, Flow Cytometry, IHC Pathology, In Vivo Grade antibodies.</p><ul><li>Primary &amp; Secondary Antibodies</li><li>Flow Cytometry Antibody</li><li>IHC Pathology Antibody</li></ul></div><span class="pc-link">Know More →</span></a>
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#0e7d6e">🔬</div><div class="pc-body"><h3>Molecular Biology Reagents</h3><p>High-fidelity reagents for amplification, extraction and electrophoresis.</p><ul><li>PCR &amp; qPCR</li><li>Reverse Transcription</li><li>Nucleic Acid Extraction</li></ul></div><span class="pc-link">Know More →</span></a>
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#5a0ea8">🧪</div><div class="pc-body"><h3>Kits &amp; Enzymes</h3><p>Complete kits and enzymes for detection, quantification and amplification.</p><ul><li>ELISA Kits</li><li>PCR Enzymes &amp; Kits</li><li>RT-PCR Enzymes &amp; Kits</li></ul></div><span class="pc-link">Know More →</span></a>
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#b05c00">⚗️</div><div class="pc-body"><h3>Gel Electrophoresis</h3><p>From gel casting to visualization — reliable solutions for clear resolution.</p><ul><li>Gel Media &amp; Casting Reagents</li><li>Protein Molecular Markers</li><li>DNA Ladders</li></ul></div><span class="pc-link">Know More →</span></a>
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#0a3d7a">⚙️</div><div class="pc-body"><h3>Instruments</h3><p>Bench-top to high-end analytical instruments for every stage of research.</p><ul><li>PCR Machine &amp; RT-PCR Systems</li><li>ELISA Plate Reader &amp; Washer</li><li>Spectrophotometer &amp; Cell Counter</li></ul></div><span class="pc-link">Know More →</span></a>
+        <a class="product-card" href="#contact"><div class="pc-icon-wrap" style="--c:#0e6b4a">🧬</div><div class="pc-body"><h3>Plasticware &amp; Cell Culture</h3><p>Precision lab plastics and cell culture consumables.</p><ul><li>Cell Culture Flasks &amp; Microplates</li><li>Centrifuge Tubes &amp; Petri Dishes</li><li>Pipette Tips &amp; Tubes</li></ul></div><span class="pc-link">Know More →</span></a>`;
+      reObserve();
+    }
+
+    function fallbackServices() {
+      document.getElementById('servicesGrid').innerHTML = `
+        <div class="service-card"><div class="svc-num">01</div><div class="svc-icon">🧫</div><h3>Assay Development</h3><p>End-to-end assay development services customized for your research or diagnostic requirements.</p><a href="#contact" class="svc-link">Enquire →</a></div>
+        <div class="service-card"><div class="svc-num">02</div><div class="svc-icon">🔁</div><h3>Custom Amplification</h3><p>Specialized PCR amplification services with high fidelity and precision.</p><a href="#contact" class="svc-link">Enquire →</a></div>
+        <div class="service-card"><div class="svc-num">03</div><div class="svc-icon">🧬</div><h3>Custom Protein Expression</h3><p>Recombinant protein expression and purification using multiple expression systems.</p><a href="#contact" class="svc-link">Enquire →</a></div>
+        <div class="service-card"><div class="svc-num">04</div><div class="svc-icon">🔬</div><h3>Gene Synthesis</h3><p>High-fidelity gene synthesis with 100% full-sequence verification for every order.</p><a href="#contact" class="svc-link">Enquire →</a></div>
+        <div class="service-card"><div class="svc-num">05</div><div class="svc-icon">🧪</div><h3>Oligonucleotide Design &amp; Synthesis</h3><p>Custom oligo design and synthesis for PCR, sequencing, CRISPR, and gene expression.</p><a href="#contact" class="svc-link">Enquire →</a></div>
+        <div class="service-card"><div class="svc-num">06</div><div class="svc-icon">📊</div><h3>Sanger Sequencing</h3><p>Accurate and rapid Sanger sequencing with fast turnaround times.</p><a href="#contact" class="svc-link">Enquire →</a></div>`;
+      reObserve();
+    }
+
+    // ── CONTACT FORM → Firestore ──
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+    const contactForm  = document.getElementById('contactForm');
+    const submitDialog = document.getElementById('submitDialog');
+    const dialogClose  = document.getElementById('dialogClose');
+    const submitBtn    = document.getElementById('submitBtn');
+
+    function showDialog(icon, title, msg) {
+      document.getElementById('dialogIcon').textContent  = icon;
+      document.getElementById('dialogTitle').textContent = title;
+      document.getElementById('dialogMsg').textContent   = msg;
+      submitDialog.showModal();
+    }
+
+    contactForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const name    = document.getElementById('fname').value.trim();
+      const email   = document.getElementById('femail').value.trim();
+      const phone   = document.getElementById('fphone').value.trim();
+      const message = document.getElementById('fmessage').value.trim();
+      if (!name || !email || !phone || !message) {
+        showDialog('⚠️', 'All fields required', 'Please fill in every field before sending.');
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        // 1️⃣ Save to Firestore — visible in admin console
+        await addDoc(collection(db, 'inquiries'), {
+          name, email, phone, message,
+          status: 'unread',
+          date: new Date().toISOString().split('T')[0],
+          createdAt: serverTimestamp()
+        });
+        // 2️⃣ Also send email via EmailJS (if configured)
+        if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+          emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            from_name: name, from_email: email, phone, message,
+            to_email: 'sales@eminotlifesciences.com'
+          });
+        }
+        contactForm.reset();
+        showDialog('✅', 'Message Sent!', "Thank you for reaching out. We'll get back to you within 24 hours.");
+      } catch (err) {
+        console.error(err);
+        showDialog('❌', 'Something went wrong', 'Could not send your message. Please call us at +91 96205 59413.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message ✉';
+      }
+    });
+
+    dialogClose.addEventListener('click', () => submitDialog.close());
+    submitDialog.addEventListener('click', e => { if (e.target === submitDialog) submitDialog.close(); });
+
+    // ── BOOT ──
+    loadProducts();
+    loadServices();
+
     // ── Hamburger ──
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
@@ -547,17 +574,16 @@
       });
     });
 
-    // ── Scroll reveal ──
-    const reveals = document.querySelectorAll('.product-card, .service-card, .auth-card, .sub-card, .about-card, .ci');
-    const ro = new IntersectionObserver(entries => {
+    // ── Scroll reveal (static elements) ──
+    const ro2 = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
           setTimeout(() => e.target.classList.add('revealed'), i * 60);
-          ro.unobserve(e.target);
+          ro2.unobserve(e.target);
         }
       });
     }, { threshold: 0.08 });
-    reveals.forEach(el => ro.observe(el));
+    document.querySelectorAll('.auth-card, .sub-card, .about-card, .ci').forEach(el => ro2.observe(el));
 
     // ── Hero particles ──
     const canvas = document.createElement('canvas');
@@ -566,18 +592,10 @@
       heroParticles.appendChild(canvas);
       const ctx = canvas.getContext('2d');
       let W, H, dots = [];
-      function resize() {
-        W = canvas.width  = heroParticles.offsetWidth;
-        H = canvas.height = heroParticles.offsetHeight;
-      }
+      function resize() { W = canvas.width = heroParticles.offsetWidth; H = canvas.height = heroParticles.offsetHeight; }
       resize();
       window.addEventListener('resize', resize);
-      for (let i = 0; i < 55; i++) dots.push({
-        x: Math.random()*W, y: Math.random()*H,
-        r: Math.random()*1.8+0.5,
-        vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25,
-        a: Math.random()*0.5+0.15
-      });
+      for (let i = 0; i < 55; i++) dots.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.8+0.5, vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, a: Math.random()*0.5+0.15 });
       function frame() {
         ctx.clearRect(0,0,W,H);
         dots.forEach(d => {
@@ -591,53 +609,12 @@
       }
       frame();
     }
-
-    // ── EmailJS ──
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
-    const contactForm = document.getElementById('contactForm');
-    const submitDialog = document.getElementById('submitDialog');
-    const dialogClose  = document.getElementById('dialogClose');
-    const submitBtn    = document.getElementById('submitBtn');
-
-    function showDialog(icon, title, msg) {
-      document.getElementById('dialogIcon').textContent  = icon;
-      document.getElementById('dialogTitle').textContent = title;
-      document.getElementById('dialogMsg').textContent   = msg;
-      submitDialog.showModal();
-    }
-
-    contactForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const name    = document.getElementById('fname').value.trim();
-      const email   = document.getElementById('femail').value.trim();
-      const phone   = document.getElementById('fphone').value.trim();
-      const message = document.getElementById('fmessage').value.trim();
-      if (!name || !email || !phone || !message) {
-        showDialog('⚠️', 'All fields required', 'Please fill in every field before sending.');
-        return;
-      }
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_name: name, from_email: email, phone, message,
-          to_email: 'anishabraham031@gmail.com'
-        });
-        contactForm.reset();
-        showDialog('✅', 'Message Sent!', "Thank you for reaching out. We'll get back to you within 24 hours.");
-      } catch (err) {
-        showDialog('❌', 'Something went wrong', 'Could not send your message. Please call us at +91 96205 59413.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message ✉';
-      }
-    });
-    dialogClose.addEventListener('click', () => submitDialog.close());
-    submitDialog.addEventListener('click', e => { if (e.target === submitDialog) submitDialog.close(); });
   </script>
+
+  <style>
+    /* Skeleton loaders while Firebase loads */
+    .skeleton-card { background: linear-gradient(90deg,#e8eef8 25%,#f4f7fc 50%,#e8eef8 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; min-height: 200px; border-radius: 14px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  </style>
 </body>
 </html>
